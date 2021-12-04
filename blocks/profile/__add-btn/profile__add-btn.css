@@ -1,0 +1,22 @@
+.profile__add-btn {
+  background-image: url(../../../images/AddBtn.svg);
+  background-color: black;
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
+  width: 150px;
+  height: 50px;
+  align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__add-btn {
+    width: 282px;
+    margin-top: 23px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__add-btn {
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Место</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body class="page">
+  <div class="container">
+    <header class="header">
+      <a href="#" class="header__logo-link">
+        <img src="./images/logo.svg" alt="Написанное на латинице название проекта." class="header__logo">
+      </a>
+    </header>
+    <main class="content">
+      <section class="profile">
+        <div class="profile__content">
+          <img src="./images/ProfilePicture.jpg" alt="Изображение профиля." class="profile__avatar">
+          <div class="profile__info">
+            <div class="profile__username-container">
+              <h1 class="profile__username">Жак-Ив Кусто</h1>
+              <button type="button" class="profile__edit-btn button"></button>
+            </div>
+            <p class="profile__description">Исследователь океана</p>
+          </div>
+        </div>
+        <button type="button" class="profile__add-btn button"></button>
+      </section>
+      <section class="elements">
+        <ul class="elements__cards">
+          <li class="elements__card">
+            <img src="./images/Karachaevsk.jpg" alt="Карачаевск." class="elements__card-image">
+            <div class="elements__card-info">
+              <h2 class="elements__card-title">Карачаевск</h2>
+              <button type="button" class="elements__like-btn button"></button>
+            </div>
+          </li>
+          <li class="elements__card">
+            <img src="./images/Elbrus.jpg" alt="Гора Эльбрус." class="elements__card-image">
+            <div class="elements__card-info">
+              <h2 class="elements__card-title">Гора Эльбрус</h2>
+              <button type="button" class="elements__like-btn button"></button>
+            </div>
+          </li>
+          <li class="elements__card">
+            <img src="./images/Dombay.jpg" alt="Домбай." class="elements__card-image">
+            <div class="elements__card-info">
+              <h2 class="elements__card-title">Домбай</h2>
+              <button type="button" class="elements__like-btn button"></button>
+            </div>
+          </li>
+          <li class="elements__card">
+            <img src="./images/Elbrus.jpg" alt="Гора Эльбрус." class="elements__card-image">
+            <div class="elements__card-info">
+              <h2 class="elements__card-title">Гора Эльбрус</h2>
+              <button type="button" class="elements__like-btn button"></button>
+            </div>
+          </li>
+          <li class="elements__card">
+            <img src="./images/Dombay.jpg" alt="Домбай." class="elements__card-image">
+            <div class="elements__card-info">
+              <h2 class="elements__card-title">Домбай</h2>
+              <button type="button" class="elements__like-btn button"></button>
+            </div>
+          </li>
+          <li class="elements__card">
+            <img src="./images/Karachaevsk.jpg" alt="Карачаево-Черкессия." class="elements__card-image">
+            <div class="elements__card-info">
+              <h2 class="elements__card-title">Карачаево-Черкессия</h2>
+              <button type="button" class="elements__like-btn button"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section class="modal">
+        <div class="modal__container">
+          <button class="modal__close-btn button"></button>
+          <h2 class="modal__title">Редактировать профиль</h2>
+          <form method="get" name="modal__form" class="modal__form">
+            <input type="text" name="modal__username" class="modal__username" value="Жак-Ив Кусто">
+            <input type="text" name="modal__user-info" class="modal__user-info" value="Исследователь океана">
+            <input type="submit" name="modal__submit-btn" class="modal__submit-btn" value="Сохранить">
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">&copy;&nbsp;2020&nbsp;Mesto&nbsp;Russia</p>
+    </footer>
+  </div>
+  <script src="./scripts/scripts.js"></script>
+</body>
+</html>

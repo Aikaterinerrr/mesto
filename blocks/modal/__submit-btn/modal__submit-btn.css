@@ -1,0 +1,21 @@
+.modal__submit-btn {
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF;
+  background: #000000;
+  border-radius: 2px;
+  border: 0;
+  width: 100%;
+  min-height: 50px;
+  padding: 0;
+  transition: .2s linear;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.modal__submit-btn:hover {
+  opacity: .8;
+}
