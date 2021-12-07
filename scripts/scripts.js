@@ -7,8 +7,10 @@ let jobInput = document.querySelector('.modal__user-info_value_user-job');
 let profileUserName = document.querySelector('.profile__user-name');
 let profileDescription = document.querySelector('.profile__description');
 
+
+
 function openModal() {
-  nameInput.value= profileUserName.textContent;
+  nameInput.value = profileUserName.textContent;
   jobInput.value = profileDescription.textContent;
   modal.classList.add('modal_active');
 };
@@ -17,15 +19,11 @@ function closeModal() {
   modal.classList.remove('modal_active')
 };
 
-function formSubmitHandler (evt) {
-    evt.preventDefault();
-
-    nameInput = nameInput.value;
-    jobInput = jobInput.value;
-
-    profileUserName.textContent = nameInput;
-    profileDescription.textContent = jobInput;
-    closeModal()
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  profileUserName.textContent = nameInput.value;
+  profileDescription.textContent = jobInput.value;
+  closeModal()
 }
 
 editButton.addEventListener('click', openModal);
