@@ -4,14 +4,24 @@
   line-height: 22px;
   color: #FFFFFF;
   margin: 16px 0 0 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 336px;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__description {
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 420px) {
   .profile__description {
     font-size: 14px;
     line-height: 17px;
-    text-align: center;
     margin-bottom: 36px;
     margin-top: 14px;
+    max-width: 282px;
   }
 }

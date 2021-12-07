@@ -19,72 +19,72 @@
         <div class="profile__content">
           <img src="./images/ProfilePicture.jpg" alt="Изображение профиля." class="profile__avatar">
           <div class="profile__info">
-            <div class="profile__username-container">
-              <h1 class="profile__username">Жак-Ив Кусто</h1>
-              <button type="button" class="profile__edit-btn button"></button>
+            <div class="profile__user-name-container">
+              <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+              <button type="button" class="profile__edit-btn button" aria-label="Редактирование профиля."></button>
             </div>
             <p class="profile__description">Исследователь океана</p>
           </div>
         </div>
-        <button type="button" class="profile__add-btn button"></button>
+        <button type="button" class="profile__add-btn button" aria-label="Добавление фото."></button>
       </section>
       <section class="elements">
         <ul class="elements__cards">
-          <li class="elements__card">
-            <img src="./images/Karachaevsk.jpg" alt="Карачаевск." class="elements__card-image">
-            <div class="elements__card-info">
-              <h2 class="elements__card-title">Карачаевск</h2>
-              <button type="button" class="elements__like-btn button"></button>
+          <li class="card">
+            <img src="./images/Karachaevsk.jpg" alt="Карачаевск." class="card__card-image">
+            <div class="card__card-info">
+              <h2 class="card__card-title">Карачаевск</h2>
+              <button type="button" class="card__like-btn" aria-label="Мне нравится."></button>
             </div>
           </li>
-          <li class="elements__card">
-            <img src="./images/Elbrus.jpg" alt="Гора Эльбрус." class="elements__card-image">
-            <div class="elements__card-info">
-              <h2 class="elements__card-title">Гора Эльбрус</h2>
-              <button type="button" class="elements__like-btn button"></button>
+          <li class="card">
+            <img src="./images/Elbrus.jpg" alt="Гора Эльбрус." class="card__card-image">
+            <div class="card__card-info">
+              <h2 class="card__card-title">Гора Эльбрус</h2>
+              <button type="button" class="card__like-btn" aria-label="Мне нравится."></button>
             </div>
           </li>
-          <li class="elements__card">
-            <img src="./images/Dombay.jpg" alt="Домбай." class="elements__card-image">
-            <div class="elements__card-info">
-              <h2 class="elements__card-title">Домбай</h2>
-              <button type="button" class="elements__like-btn button"></button>
+          <li class="card">
+            <img src="./images/Dombay.jpg" alt="Домбай." class="card__card-image">
+            <div class="card__card-info">
+              <h2 class="card__card-title">Домбай</h2>
+              <button type="button" class="card__like-btn" aria-label="Мне нравится."></button>
             </div>
           </li>
-          <li class="elements__card">
-            <img src="./images/Elbrus.jpg" alt="Гора Эльбрус." class="elements__card-image">
-            <div class="elements__card-info">
-              <h2 class="elements__card-title">Гора Эльбрус</h2>
-              <button type="button" class="elements__like-btn button"></button>
+          <li class="card">
+            <img src="./images/Elbrus.jpg" alt="Гора Эльбрус." class="card__card-image">
+            <div class="card__card-info">
+              <h2 class="card__card-title">Гора Эльбрус</h2>
+              <button type="button" class="card__like-btn" aria-label="Мне нравится."></button>
             </div>
           </li>
-          <li class="elements__card">
-            <img src="./images/Dombay.jpg" alt="Домбай." class="elements__card-image">
-            <div class="elements__card-info">
-              <h2 class="elements__card-title">Домбай</h2>
-              <button type="button" class="elements__like-btn button"></button>
+          <li class="card">
+            <img src="./images/Dombay.jpg" alt="Домбай." class="card__card-image">
+            <div class="card__card-info">
+              <h2 class="card__card-title">Домбай</h2>
+              <button type="button" class="card__like-btn" aria-label="Мне нравится."></button>
             </div>
           </li>
-          <li class="elements__card">
-            <img src="./images/Karachaevsk.jpg" alt="Карачаево-Черкессия." class="elements__card-image">
-            <div class="elements__card-info">
-              <h2 class="elements__card-title">Карачаево-Черкессия</h2>
-              <button type="button" class="elements__like-btn button"></button>
+          <li class="card">
+            <img src="./images/Karachaevsk.jpg" alt="Карачаево-Черкессия." class="card__card-image">
+            <div class="card__card-info">
+              <h2 class="card__card-title">Карачаево-Черкессия</h2>
+              <button type="button" class="card__like-btn" aria-label="Мне нравится."></button>
             </div>
           </li>
         </ul>
       </section>
-      <section class="modal">
+      <div class="modal">
         <div class="modal__container">
-          <button class="modal__close-btn button"></button>
+          <button class="modal__close-btn button" type="button" aria-label="Закрытие модального окна."></button>
           <h2 class="modal__title">Редактировать профиль</h2>
           <form method="get" name="modal__form" class="modal__form">
-            <input type="text" name="modal__username" class="modal__username" value="Жак-Ив Кусто">
-            <input type="text" name="modal__user-info" class="modal__user-info" value="Исследователь океана">
-            <input type="submit" name="modal__submit-btn" class="modal__submit-btn" value="Сохранить">
+            <input type="text" name="modal__user-name" class="modal__user-info modal__user-info_value_user-name" value="">
+            <input type="text" name="modal__user-job" class="modal__user-info modal__user-info_value_user-job" value="">
+            <button type="submit" name="modal__submit-btn" class="modal__submit-btn" value="Сохранить">Сохранить</button>
           </form>
         </div>
-      </section>
+      </div>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy;&nbsp;2020&nbsp;Mesto&nbsp;Russia</p>
