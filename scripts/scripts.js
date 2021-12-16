@@ -1,31 +1,31 @@
-let editButton = document.querySelector('.profile__edit-btn');
-let addButton = document.querySelector('.profile__add-btn');
+const editButton = document.querySelector('.profile__edit-btn');
+const addButton = document.querySelector('.profile__add-btn');
 
-let modalEdit = document.querySelector('.modal_type_edit');
-let modalAdd = document.querySelector('.modal_type_add');
-let modalImage = document.querySelector('.modal_type_image');
+const modalEdit = document.querySelector('.modal_type_edit');
+const modalAdd = document.querySelector('.modal_type_add');
+const modalImage = document.querySelector('.modal_type_image');
 
-let closeEditButton = document.querySelector('.modal__close-btn_type_modal-edit-close');
-let closeAddButton = document.querySelector('.modal__close-btn_type_modal-add-close');
-let closeImageButton = document.querySelector('.modal__close-btn_type_modal-image-close');
+const closeEditButton = document.querySelector('.modal__close-btn_type_modal-edit-close');
+const closeAddButton = document.querySelector('.modal__close-btn_type_modal-add-close');
+const closeImageButton = document.querySelector('.modal__close-btn_type_modal-image-close');
 
-let editFormElement = document.querySelector('.modal__form_type_edit-form');
-let addFormElement = document.querySelector('.modal__form_type_add-form');
+const editFormElement = document.querySelector('.modal__form_type_edit-form');
+const addFormElement = document.querySelector('.modal__form_type_add-form');
 
-let nameInput = document.querySelector('.modal__info_type_user-name');
-let jobInput = document.querySelector('.modal__info_type_user-job');
+const nameInput = document.querySelector('.modal__info_type_user-name');
+const jobInput = document.querySelector('.modal__info_type_user-job');
 
-let placeInput = document.querySelector('.modal__info_type_place-name');
-let placeImageInput = document.querySelector('.modal__info_type_place-image');
+const placeInput = document.querySelector('.modal__info_type_place-name');
+const placeImageInput = document.querySelector('.modal__info_type_place-image');
 
-let profileUserName = document.querySelector('.profile__user-name');
-let profileDescription = document.querySelector('.profile__description');
+const profileUserName = document.querySelector('.profile__user-name');
+const profileDescription = document.querySelector('.profile__description');
 
-let elementsCards = document.querySelector('.elements__cards');
-let elementsTemplate = document.querySelector('.elements__template');
+const elementsCards = document.querySelector('.elements__cards');
+const elementsTemplate = document.querySelector('.elements__template');
 
-let modalImagePicture = document.querySelector('.modal__image');
-let modalImageCaption = document.querySelector('.modal__caption');
+const modalImagePicture = document.querySelector('.modal__image');
+const modalImageCaption = document.querySelector('.modal__caption');
 
 const initialCards = [
   {
@@ -72,8 +72,6 @@ function openModalEdit() {
 
 function openModalAdd() {
   openModal(modalAdd);
-  placeInput.value = '';
-  placeImageInput.value = '';
 };
 
 function openModalImage(elem) {
@@ -109,6 +107,8 @@ function addFormSubmitHandler(evt) {
     link: placeImageInput.value
   };
   addCard(cardToAdd);
+  placeInput.value = '';
+  placeImageInput.value = '';
   closeModalAdd();
 }
 
@@ -122,23 +122,23 @@ function likeCard(elem) {
 };
 
 function produceCard(elem) {
-  let card = elementsTemplate.content.cloneNode(true).querySelector('.card');
-  let cardPhoto = card.querySelector('.card__card-image');
+  const card = elementsTemplate.content.cloneNode(true).querySelector('.card');
+  const cardPhoto = card.querySelector('.card__card-image');
   cardPhoto.src = elem.link;
   cardPhoto.alt = elem.name
-  let cardTitle = card.querySelector('.card__card-title');
+  const cardTitle = card.querySelector('.card__card-title');
   cardTitle.textContent = elem.name;
 
-  let cardRemove = card.querySelector('.card__remove-btn');
+  const cardRemove = card.querySelector('.card__remove-btn');
   cardRemove.addEventListener('click', () => removeCard(card));
-  let likeButton = card.querySelector('.card__like-btn');
+  const likeButton = card.querySelector('.card__like-btn');
   likeButton.addEventListener('click', () => likeCard(likeButton));
   cardPhoto.addEventListener('click', () => openModalImage(elem));
   return card;
 }
 
 function addCard(elem) {
-  let card = produceCard(elem);
+  const card = produceCard(elem);
   elementsCards.prepend(card);
 }
 
