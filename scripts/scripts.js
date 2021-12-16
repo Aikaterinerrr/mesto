@@ -16,13 +16,16 @@ let nameInput = document.querySelector('.modal__info_type_user-name');
 let jobInput = document.querySelector('.modal__info_type_user-job');
 
 let placeInput = document.querySelector('.modal__info_type_place-name');
-let placeImage = document.querySelector('.modal__info_type_place-image');
+let placeImageInput = document.querySelector('.modal__info_type_place-image');
 
 let profileUserName = document.querySelector('.profile__user-name');
 let profileDescription = document.querySelector('.profile__description');
 
 let elementsCards = document.querySelector('.elements__cards');
 let elementsTemplate = document.querySelector('.elements__template');
+
+let modalImagePicture = document.querySelector('.modal__image');
+let modalImageCaption = document.querySelector('.modal__caption');
 
 const initialCards = [
   {
@@ -51,26 +54,7 @@ const initialCards = [
   }
 ];
 
-function removeCard(elem) {
-  elem.remove()
-};
-
-function likeCard(elem) {
-  elem.classList.toggle('card__like-btn_active');
-  elem.classList.toggle('card__like-btn');
-};
-
-initialCards.forEach(function (elem) {
-  const newPhoto = elementsTemplate.content.cloneNode(true).querySelector('.card');
-  elementsCards.append(newPhoto);
-  newPhoto.querySelector('.card__card-image').src = elem.link;
-  newPhoto.querySelector('.card__card-image').alt = elem.name;
-  newPhoto.querySelector('.card__card-title').textContent = elem.name;
-  let cardRemove = newPhoto.querySelector('.card__remove-btn');
-  cardRemove.addEventListener('click', () => removeCard(newPhoto));
-  let likeButton = newPhoto.querySelector('.card__like-btn');
-  likeButton.addEventListener('click', () => likeCard(likeButton));
-});
+addInitialCards();
 
 function openModal(modal) {
   modal.classList.add('modal_active');
@@ -86,43 +70,88 @@ function openModalEdit() {
   jobInput.value = profileDescription.textContent;
 };
 
-function closeModalEdit() {
-  closeModal(modalEdit);
-};
-
-function editFormSubmitHandler(evt) {
-  evt.preventDefault();
-  profileUserName.textContent = nameInput.value;
-  profileDescription.textContent = jobInput.value;
-  closeModal(modalEdit);
-};
-
 function openModalAdd() {
   openModal(modalAdd);
   placeInput.value = '';
-  placeImage.value = '';
+  placeImageInput.value = '';
+};
+
+function openModalImage(elem) {
+  openModal(modalImage);
+  modalImagePicture.src = elem.link;
+  modalImagePicture.alt = elem.name;
+  modalImageCaption.textContent = elem.name;
+};
+
+function closeModalEdit() {
+  closeModal(modalEdit);
 };
 
 function closeModalAdd() {
   closeModal(modalAdd);
 };
 
+function closeModalImage() {
+  closeModal(modalImage);
+};
+
+function editFormSubmitHandler(evt) {
+  evt.preventDefault();
+  profileUserName.textContent = nameInput.value;
+  profileDescription.textContent = jobInput.value;
+  closeModalEdit();
+};
+
 function addFormSubmitHandler(evt) {
   evt.preventDefault();
-  const newPhoto = elementsTemplate.content.cloneNode(true).querySelector('.card');
-  newPhoto.querySelector('.card__card-image').src = placeImage.value;
-  newPhoto.querySelector('.card__card-title').textContent = placeInput.value;
-  elementsCards.prepend(newPhoto);
-  closeModal(modalAdd);
-  let cardRemove = newPhoto.querySelector('.card__remove-btn');
-  cardRemove.addEventListener('click', () => removeCard(newPhoto));
-  let likeButton = newPhoto.querySelector('.card__like-btn');
-  likeButton.addEventListener('click', () => likeCard(likeButton));
+  const cardToAdd = {
+    name: placeInput.value,
+    link: placeImageInput.value
+  };
+  addCard(cardToAdd);
+  closeModalAdd();
+}
+
+function removeCard(elem) {
+  elem.remove()
 };
+
+function likeCard(elem) {
+  elem.classList.toggle('card__like-btn_active');
+  elem.classList.toggle('card__like-btn');
+};
+
+function produceCard(elem) {
+  let card = elementsTemplate.content.cloneNode(true).querySelector('.card');
+  let cardPhoto = card.querySelector('.card__card-image');
+  cardPhoto.src = elem.link;
+  cardPhoto.alt = elem.name
+  let cardTitle = card.querySelector('.card__card-title');
+  cardTitle.textContent = elem.name;
+
+  let cardRemove = card.querySelector('.card__remove-btn');
+  cardRemove.addEventListener('click', () => removeCard(card));
+  let likeButton = card.querySelector('.card__like-btn');
+  likeButton.addEventListener('click', () => likeCard(likeButton));
+  cardPhoto.addEventListener('click', () => openModalImage(elem));
+  return card;
+}
+
+function addCard(elem) {
+  let card = produceCard(elem);
+  elementsCards.prepend(card);
+}
+
+function addInitialCards() {
+  initialCards.forEach((elem) => addCard(elem));
+}
 
 editButton.addEventListener('click', openModalEdit);
 addButton.addEventListener('click', openModalAdd);
+
 closeEditButton.addEventListener('click', closeModalEdit);
 closeAddButton.addEventListener('click', closeModalAdd);
+closeImageButton.addEventListener('click', closeModalImage);
+
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 addFormElement.addEventListener('submit', addFormSubmitHandler);

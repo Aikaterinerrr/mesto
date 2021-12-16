@@ -35,11 +35,11 @@
       </section>
       <div class="modal modal_type_edit">
         <div class="modal__container">
-          <button class="modal__close-btn modal__close-btn_type_modal-edit-close button" type="button" aria-label="Закрытие модального окна."></button>
+          <button class="modal__close-btn modal__close-btn_type_modal-edit-close button" type="button"
+            aria-label="Закрытие модального окна."></button>
           <h2 class="modal__title">Редактировать профиль</h2>
           <form method="get" name="modal__form" class="modal__form modal__form_type_edit-form">
-            <input type="text" name="modal__user-name" class="modal__info modal__info_type_user-name"
-              value="">
+            <input type="text" name="modal__user-name" class="modal__info modal__info_type_user-name" value="">
             <input type="text" name="modal__user-job" class="modal__info modal__info_type_user-job" value="">
             <button type="submit" name="modal__submit-btn" class="modal__submit-btn"
               value="Сохранить">Сохранить</button>
@@ -48,12 +48,14 @@
       </div>
       <div class="modal modal_type_add">
         <div class="modal__container">
-          <button class="modal__close-btn modal__close-btn_type_modal-add-close button" type="button" aria-label="Закрытие модального окна."></button>
+          <button class="modal__close-btn modal__close-btn_type_modal-add-close button" type="button"
+            aria-label="Закрытие модального окна."></button>
           <h2 class="modal__title">Новое место</h2>
           <form method="get" name="modal__form" class="modal__form modal__form_type_add-form">
-            <input type="text" name="modal__place-name" class="modal__info modal__info_type_place-name"
-              value="" placeholder="Название">
-            <input type="text" name="modal__place-image" class="modal__info modal__info_type_place-image" value="" placeholder="Ссылка на картинку">
+            <input type="text" name="modal__place-name" class="modal__info modal__info_type_place-name" value=""
+              placeholder="Название">
+            <input type="text" name="modal__place-image" class="modal__info modal__info_type_place-image" value=""
+              placeholder="Ссылка на картинку">
             <button type="submit" name="modal__submit-btn" class="modal__submit-btn"
               value="Сохранить">Сохранить</button>
           </form>
@@ -61,19 +63,21 @@
       </div>
       <div class="modal modal_type_image">
         <div class="modal__wrapper">
-          <button class="modal__close-btn modal__close-btn_type_modal-image-close button" type="button" aria-label="Закрытие модального окна."></button>
+          <button class="modal__close-btn modal__close-btn_type_modal-image-close button" type="button"
+            aria-label="Закрытие модального окна."></button>
           <img src="" alt="" class="modal__image">
+          <h2 class="modal__caption"></h2>
         </div>
       </div>
       <template class="elements__template">
-          <li class="card">
-            <button type="button" class="card__remove-btn button" aria-label="Удаление картинки."></button>
-            <img src="" alt="" class="card__card-image">
-            <div class="card__card-info">
-              <h2 class="card__card-title"></h2>
-              <button type="button" class="card__like-btn" aria-label="Мне нравится."></button>
-            </div>
-          </li>
+        <li class="card">
+          <button type="button" class="card__remove-btn button" aria-label="Удаление картинки."></button>
+          <img src="" alt="" class="card__card-image">
+          <div class="card__card-info">
+            <h2 class="card__card-title"></h2>
+            <button type="button" class="card__like-btn" aria-label="Мне нравится."></button>
+          </div>
+        </li>
       </template>
     </main>
     <footer class="footer">
