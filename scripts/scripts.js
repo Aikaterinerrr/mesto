@@ -64,10 +64,20 @@ function closeModal(modal) {
   modal.classList.remove('modal_active')
 };
 
+function resetModalValidation(modal) {
+  const inputList = Array.from(document.querySelectorAll('.modal__info'));
+  inputList.forEach((inputElement) => {
+    const errorElement = document.querySelector(`#${inputElement.id}-error`);
+    errorElement.textContent = '';
+    inputElement.classList.remove('modal__info_type_error');
+  });
+}
+
 function openModalEdit() {
   openModal(modalEdit);
   nameInput.value = profileUserName.textContent;
   jobInput.value = profileDescription.textContent;
+  resetModalValidation(modalEdit);
 };
 
 function openModalAdd() {

@@ -1,0 +1,9 @@
+.modal__label {
+  margin-bottom: 30px;
+  display: block;
+  position: relative;
+}
+
+.modal__label:last-of-type {
+  margin-bottom: 0;
+}

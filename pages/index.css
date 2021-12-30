@@ -35,7 +35,11 @@
 @import url(../blocks/modal/__close-btn/modal__close-btn.css);
 @import url(../blocks/modal/__image/modal__image.css);
 @import url(../blocks/modal/__submit-btn/modal__submit-btn.css);
+@import url(../blocks/modal/__submit-btn/_inactive/modal__submit-btn_inactive.css);
 @import url(../blocks/modal/__title/modal__title.css);
 @import url(../blocks/modal/__info/modal__info.css);
+@import url(../blocks/modal/__info/_type/modal__info_type_error.css);
+@import url(../blocks/modal/__label/modal__label.css);
 @import url(../blocks/modal/__wrapper/modal__wrapper.css);
+@import url(../blocks/modal/__input-error/modal__input-error.css);
 
