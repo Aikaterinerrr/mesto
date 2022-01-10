@@ -58,26 +58,32 @@ addInitialCards();
 
 function openModal(modal) {
   modal.classList.add('modal_active');
+  document.body.addEventListener('keyup', closeModalWithEsc);
 };
 
 function closeModal(modal) {
-  modal.classList.remove('modal_active')
+  modal.classList.remove('modal_active');
+  document.body.removeEventListener('keyup', closeModalWithEsc);
 };
 
-function resetModalValidation(modal) {
-  const inputList = Array.from(document.querySelectorAll('.modal__info'));
-  inputList.forEach((inputElement) => {
-    const errorElement = document.querySelector(`#${inputElement.id}-error`);
-    errorElement.textContent = '';
-    inputElement.classList.remove('modal__info_type_error');
-  });
+function closeModalWithEsc(evt) {
+  if (evt.key == 'Escape') {
+    const modalActive = document.querySelector('.modal_active');
+    closeModal(modalActive);
+  };
+};
+
+function closeModalWithOverlay(evt) {
+  if (evt.target.classList.contains('modal__overlay')) {
+    const modalActive = evt.target.closest('.modal');
+    closeModal(modalActive);
+  }
 }
 
 function openModalEdit() {
   openModal(modalEdit);
   nameInput.value = profileUserName.textContent;
   jobInput.value = profileDescription.textContent;
-  resetModalValidation(modalEdit);
 };
 
 function openModalAdd() {
@@ -162,6 +168,7 @@ addButton.addEventListener('click', openModalAdd);
 closeEditButton.addEventListener('click', closeModalEdit);
 closeAddButton.addEventListener('click', closeModalAdd);
 closeImageButton.addEventListener('click', closeModalImage);
+document.body.addEventListener('click', closeModalWithOverlay);
 
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 addFormElement.addEventListener('submit', addFormSubmitHandler);
