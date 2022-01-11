@@ -5,10 +5,6 @@ const modalEdit = document.querySelector('.modal_type_edit');
 const modalAdd = document.querySelector('.modal_type_add');
 const modalImage = document.querySelector('.modal_type_image');
 
-const closeEditButton = document.querySelector('.modal__close-btn_type_modal-edit-close');
-const closeAddButton = document.querySelector('.modal__close-btn_type_modal-add-close');
-const closeImageButton = document.querySelector('.modal__close-btn_type_modal-image-close');
-
 const editFormElement = document.querySelector('.modal__form_type_edit-form');
 const addFormElement = document.querySelector('.modal__form_type_add-form');
 
@@ -54,8 +50,6 @@ const initialCards = [
   }
 ];
 
-addInitialCards();
-
 function openModal(modal) {
   modal.classList.add('modal_active');
   document.body.addEventListener('keyup', closeModalWithEsc);
@@ -73,8 +67,8 @@ function closeModalWithEsc(evt) {
   };
 };
 
-function closeModalWithOverlay(evt) {
-  if (evt.target.classList.contains('modal__overlay')) {
+function closeModalWithOverlayAndCloseButton(evt) {
+  if (evt.target.classList.contains('modal__overlay') || evt.target.classList.contains('modal__close-btn')) {
     const modalActive = evt.target.closest('.modal');
     closeModal(modalActive);
   }
@@ -88,6 +82,11 @@ function openModalEdit() {
 
 function openModalAdd() {
   openModal(modalAdd);
+  if ((placeInput.value === '') || (placeImageInput.value === '')) {
+    const addFormElement = document.querySelector('.modal__form_type_add-form');
+    const addButtonElement = addFormElement.querySelector(validationConfig.submitButtonSelector);
+    disableButtonState(addButtonElement, validationConfig.inactiveButtonClass);
+  }
 };
 
 function openModalImage(elem) {
@@ -162,13 +161,12 @@ function addInitialCards() {
   initialCards.forEach((elem) => addCard(elem));
 }
 
+addInitialCards();
+
 editButton.addEventListener('click', openModalEdit);
 addButton.addEventListener('click', openModalAdd);
 
-closeEditButton.addEventListener('click', closeModalEdit);
-closeAddButton.addEventListener('click', closeModalAdd);
-closeImageButton.addEventListener('click', closeModalImage);
-document.body.addEventListener('click', closeModalWithOverlay);
+document.body.addEventListener('click', closeModalWithOverlayAndCloseButton);
 
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 addFormElement.addEventListener('submit', addFormSubmitHandler);

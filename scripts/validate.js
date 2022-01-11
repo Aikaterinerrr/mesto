@@ -46,13 +46,21 @@ function hasInvalidInput(inputList) {
   });
 };
 
+function disableButtonState(buttonElement, disableButtonClass) {
+  buttonElement.classList.add(disableButtonClass);
+  buttonElement.disabled = true;
+};
+
+function enableButtonState(buttonElement, disableButtonClass) {
+  buttonElement.classList.remove(disableButtonClass);
+  buttonElement.disabled = false;
+}
+
 function toggleButtonState(inputList, buttonElement, validationConfig) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(validationConfig.inactiveButtonClass);
-    buttonElement.disabled = true;
+    disableButtonState(buttonElement, validationConfig.inactiveButtonClass);
   } else {
-    buttonElement.classList.remove(validationConfig.inactiveButtonClass);
-    buttonElement.disabled = false;
+    enableButtonState(buttonElement, validationConfig.inactiveButtonClass)
   }
 }
 
