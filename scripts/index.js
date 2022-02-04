@@ -1,3 +1,6 @@
+import Card from './Сard.js';
+import FormValidator from './FormValidator.js'
+
 const editButton = document.querySelector('.profile__edit-btn');
 const addButton = document.querySelector('.profile__add-btn');
 
@@ -18,7 +21,6 @@ const profileUserName = document.querySelector('.profile__user-name');
 const profileDescription = document.querySelector('.profile__description');
 
 const elementsCards = document.querySelector('.elements__cards');
-const elementsTemplate = document.querySelector('.elements__template');
 
 const modalImagePicture = document.querySelector('.modal__image');
 const modalImageCaption = document.querySelector('.modal__caption');
@@ -50,6 +52,20 @@ const initialCards = [
   }
 ];
 
+const validationConfig = {
+  formSelector: '.modal__form',
+  inputSelector: '.modal__info',
+  submitButtonSelector: '.modal__submit-btn',
+  inactiveButtonClass: 'modal__submit-btn_inactive',
+  inputErrorClass: 'modal__info_type_error',
+  errorClass: 'modal__input-error'
+};
+
+const validateModalTypeEdit = new FormValidator(validationConfig, editFormElement);
+validateModalTypeEdit.enableValidation();
+const validateModalTypeAdd = new FormValidator(validationConfig, addFormElement);
+validateModalTypeAdd.enableValidation();
+
 function openModal(modal) {
   modal.classList.add('modal_active');
   document.body.addEventListener('keyup', closeModalWithEsc);
@@ -72,7 +88,7 @@ function closeModalWithOverlayAndCloseButton(evt) {
     const modalActive = evt.target.closest('.modal');
     closeModal(modalActive);
   }
-}
+};
 
 function openModalEdit() {
   openModal(modalEdit);
@@ -85,7 +101,8 @@ function openModalAdd() {
   if ((placeInput.value === '') || (placeImageInput.value === '')) {
     const addFormElement = document.querySelector('.modal__form_type_add-form');
     const addButtonElement = addFormElement.querySelector(validationConfig.submitButtonSelector);
-    disableButtonState(addButtonElement, validationConfig.inactiveButtonClass);
+    addButtonElement.classList.add(validationConfig.inactiveButtonClass);
+    addButtonElement.disabled = true;
   }
 };
 
@@ -96,23 +113,11 @@ function openModalImage(elem) {
   modalImageCaption.textContent = elem.name;
 };
 
-function closeModalEdit() {
-  closeModal(modalEdit);
-};
-
-function closeModalAdd() {
-  closeModal(modalAdd);
-};
-
-function closeModalImage() {
-  closeModal(modalImage);
-};
-
 function editFormSubmitHandler(evt) {
   evt.preventDefault();
   profileUserName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
-  closeModalEdit();
+  closeModal(modalEdit);
 };
 
 function addFormSubmitHandler(evt) {
@@ -124,44 +129,15 @@ function addFormSubmitHandler(evt) {
   addCard(cardToAdd);
   placeInput.value = '';
   placeImageInput.value = '';
-  closeModalAdd();
-}
-
-function removeCard(elem) {
-  elem.remove()
+  closeModal(modalAdd);
 };
-
-function likeCard(elem) {
-  elem.classList.toggle('card__like-btn_active');
-  elem.classList.toggle('card__like-btn');
-};
-
-function produceCard(elem) {
-  const card = elementsTemplate.content.cloneNode(true).querySelector('.card');
-  const cardPhoto = card.querySelector('.card__card-image');
-  cardPhoto.src = elem.link;
-  cardPhoto.alt = elem.name
-  const cardTitle = card.querySelector('.card__card-title');
-  cardTitle.textContent = elem.name;
-
-  const cardRemove = card.querySelector('.card__remove-btn');
-  cardRemove.addEventListener('click', () => removeCard(card));
-  const likeButton = card.querySelector('.card__like-btn');
-  likeButton.addEventListener('click', () => likeCard(likeButton));
-  cardPhoto.addEventListener('click', () => openModalImage(elem));
-  return card;
-}
 
 function addCard(elem) {
-  const card = produceCard(elem);
+  const card = new Card(elem, openModalImage, '.elements__template').generateCard();
   elementsCards.prepend(card);
-}
+};
 
-function addInitialCards() {
-  initialCards.forEach((elem) => addCard(elem));
-}
-
-addInitialCards();
+initialCards.forEach((elem) => addCard(elem));
 
 editButton.addEventListener('click', openModalEdit);
 addButton.addEventListener('click', openModalAdd);
