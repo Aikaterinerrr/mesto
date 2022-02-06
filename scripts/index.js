@@ -44,17 +44,16 @@ validateModalTypeAdd.disableButtonState();
 
 function openModal(modal) {
   modal.classList.add('modal_active');
-  //modal.addEventListener('keyup', closeModalWithEsc);
+  document.addEventListener('keyup', closeModalWithEsc);
 };
 
 function closeModal(modal) {
   modal.classList.remove('modal_active');
-  //modal.removeEventListener('keyup', closeModalWithEsc);
+  document.removeEventListener('keyup', closeModalWithEsc);
 };
 
 function closeModalWithEsc(evt) {
   if (evt.key == 'Escape') {
-    //const modalActive = evt.target.closest('.modal');
     const modalActive = document.querySelector('.modal_active');
     closeModal(modalActive);
   }
@@ -116,7 +115,6 @@ addButton.addEventListener('click', openModalAdd);
 
 modalList.forEach(modal => {
   modal.addEventListener('click', closeModalWithOverlayAndCloseButton);
-  modal.addEventListener('keyup', closeModalWithEsc);
 });
 
 editFormElement.addEventListener('submit', editFormSubmitHandler);
