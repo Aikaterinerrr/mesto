@@ -44,6 +44,7 @@ validateModalTypeAdd.disableButtonState();
 
 function openModal(modal) {
   modal.classList.add('modal_active');
+  //modal.addEventListener('keyup', closeModalWithEsc);
 };
 
 function closeModal(modal) {
@@ -52,15 +53,11 @@ function closeModal(modal) {
 };
 
 function closeModalWithEsc(evt) {
-  //if (evt.key == 'Escape') {
-    //const modalActive = evt.target.closest('.modal_active');
-    //const modalActive = document.querySelector('.modal_active');
-    //closeModal(modalActive);
-    if (evt.key == 'Escape') {
-      const modalActive = evt.target.closest('.modal');
-      closeModal(modalActive);
-    }
-  //};
+  if (evt.key == 'Escape') {
+    //const modalActive = evt.target.closest('.modal');
+    const modalActive = document.querySelector('.modal_active');
+    closeModal(modalActive);
+  }
 };
 
 function closeModalWithOverlayAndCloseButton(evt) {
