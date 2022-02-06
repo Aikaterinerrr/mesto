@@ -1,9 +1,11 @@
+import { initialCards } from './initialCards.js';
 import Card from './Сard.js';
 import FormValidator from './FormValidator.js'
 
 const editButton = document.querySelector('.profile__edit-btn');
 const addButton = document.querySelector('.profile__add-btn');
 
+const modalList = document.querySelectorAll('.modal');
 const modalEdit = document.querySelector('.modal_type_edit');
 const modalAdd = document.querySelector('.modal_type_add');
 const modalImage = document.querySelector('.modal_type_image');
@@ -25,33 +27,6 @@ const elementsCards = document.querySelector('.elements__cards');
 const modalImagePicture = document.querySelector('.modal__image');
 const modalImageCaption = document.querySelector('.modal__caption');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const validationConfig = {
   formSelector: '.modal__form',
   inputSelector: '.modal__info',
@@ -65,22 +40,27 @@ const validateModalTypeEdit = new FormValidator(validationConfig, editFormElemen
 validateModalTypeEdit.enableValidation();
 const validateModalTypeAdd = new FormValidator(validationConfig, addFormElement);
 validateModalTypeAdd.enableValidation();
+validateModalTypeAdd.disableButtonState();
 
 function openModal(modal) {
   modal.classList.add('modal_active');
-  document.body.addEventListener('keyup', closeModalWithEsc);
 };
 
 function closeModal(modal) {
   modal.classList.remove('modal_active');
-  document.body.removeEventListener('keyup', closeModalWithEsc);
+  //modal.removeEventListener('keyup', closeModalWithEsc);
 };
 
 function closeModalWithEsc(evt) {
-  if (evt.key == 'Escape') {
-    const modalActive = document.querySelector('.modal_active');
-    closeModal(modalActive);
-  };
+  //if (evt.key == 'Escape') {
+    //const modalActive = evt.target.closest('.modal_active');
+    //const modalActive = document.querySelector('.modal_active');
+    //closeModal(modalActive);
+    if (evt.key == 'Escape') {
+      const modalActive = evt.target.closest('.modal');
+      closeModal(modalActive);
+    }
+  //};
 };
 
 function closeModalWithOverlayAndCloseButton(evt) {
@@ -98,12 +78,6 @@ function openModalEdit() {
 
 function openModalAdd() {
   openModal(modalAdd);
-  if ((placeInput.value === '') || (placeImageInput.value === '')) {
-    const addFormElement = document.querySelector('.modal__form_type_add-form');
-    const addButtonElement = addFormElement.querySelector(validationConfig.submitButtonSelector);
-    addButtonElement.classList.add(validationConfig.inactiveButtonClass);
-    addButtonElement.disabled = true;
-  }
 };
 
 function openModalImage(elem) {
@@ -130,6 +104,7 @@ function addFormSubmitHandler(evt) {
   placeInput.value = '';
   placeImageInput.value = '';
   closeModal(modalAdd);
+  validateModalTypeAdd.disableButtonState();
 };
 
 function addCard(elem) {
@@ -142,7 +117,10 @@ initialCards.forEach((elem) => addCard(elem));
 editButton.addEventListener('click', openModalEdit);
 addButton.addEventListener('click', openModalAdd);
 
-document.body.addEventListener('click', closeModalWithOverlayAndCloseButton);
+modalList.forEach(modal => {
+  modal.addEventListener('click', closeModalWithOverlayAndCloseButton);
+  modal.addEventListener('keyup', closeModalWithEsc);
+});
 
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 addFormElement.addEventListener('submit', addFormSubmitHandler);

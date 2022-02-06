@@ -21,7 +21,7 @@ class Card {
 
     this._cardPhoto = this._element.querySelector('.card__card-image');
     this._cardPhoto.src = this._link;
-    this._cardPhoto.alt = this._link;
+    this._cardPhoto.alt = this._name;
 
     this._cardTitle = this._element.querySelector('.card__card-title');
     this._cardTitle.textContent = this._name;
@@ -36,7 +36,6 @@ class Card {
 
   _likeCard() {
     this._cardLikeBtn.classList.toggle('card__like-btn_active');
-    this._cardLikeBtn.classList.toggle('card__like-btn');
   };
 
   _removeCard() {
