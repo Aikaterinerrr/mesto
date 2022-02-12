@@ -2,17 +2,16 @@ import Popup from "./Popup.js";
 import { validationConfig } from "./index.js";
 
 export default class PopupWithForm extends Popup {
-  constructor({ popupSelector, handleFormSubmit  }) {
+  constructor({ popupSelector, handleFormSubmit }) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
     this._formElement = this._popup.querySelector(validationConfig.formSelector);
-    this._inputList = this._popup.querySelectorAll(validationConfig.inputSelector);
   };
 
   getInputValues() {
     this._formValues = {};
-    this._inputList.forEach(input => this._formValues[input.name] = input.value);
-
+    this._formValues.name = this._popup.querySelector('.modal__info_type_place-name').value;
+    this._formValues.link = this._popup.querySelector('.modal__info_type_place-image').value;
     return this._formValues;
   };
 
