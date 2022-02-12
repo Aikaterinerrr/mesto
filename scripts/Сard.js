@@ -1,9 +1,9 @@
 class Card {
-  constructor(data, openModalImage, cardSelector) {
+  constructor({ data, handleCardClick }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._data = data;
-    this._openModalImage = openModalImage;
+    this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
   };
 
@@ -45,7 +45,7 @@ class Card {
   _setEventListeners() {
     this._cardRemoveBtn.addEventListener('click', () => this._removeCard());
     this._cardLikeBtn.addEventListener('click', () => this._likeCard());
-    this._cardPhoto.addEventListener('click', () => this._openModalImage(this._data));
+    this._cardPhoto.addEventListener('click', () => this._handleCardClick(this._data));
   };
 }
 
