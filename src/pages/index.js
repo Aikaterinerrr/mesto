@@ -1,38 +1,28 @@
-import { initialCards } from './initialCards.js';
-import Card from './Сard.js';
-import Section from './Section.js';
-import FormValidator from './FormValidator.js';
-import UserInfo from './UserInfo.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
+import './index.css';
 
-const editButton = document.querySelector('.profile__edit-btn');
-const addButton = document.querySelector('.profile__add-btn');
-
-const modalEdit = document.querySelector('.modal_type_edit');
-const modalAdd = document.querySelector('.modal_type_add');
-const modalImage = document.querySelector('.modal_type_image');
-
-const editFormSelector = '.modal__form_type_edit-form';
-const addFormSelector = '.modal__form_type_add-form';
-
-const nameInput = document.querySelector('.modal__info_type_user-name');
-const jobInput = document.querySelector('.modal__info_type_user-job');
-
-const profileUserNameSelector = '.profile__user-name';
-const profileDescriptionSelector = '.profile__description';
-
-const cardListSelector = '.elements__cards';
-const cardTemplateSelector = '.elements__template';
-
-export const validationConfig = {
-  formSelector: '.modal__form',
-  inputSelector: '.modal__info',
-  submitButtonSelector: '.modal__submit-btn',
-  inactiveButtonClass: 'modal__submit-btn_inactive',
-  inputErrorClass: 'modal__info_type_error',
-  errorClass: 'modal__input-error'
-};
+import Card from '../components/Сard.js';
+import Section from '../components/Section.js';
+import FormValidator from '../components/FormValidator.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import {
+  initialCards,
+  editButton,
+  addButton,
+  modalEdit,
+  modalAdd,
+  modalImage,
+  editFormSelector,
+  addFormSelector,
+  nameInput,
+  jobInput,
+  profileUserNameSelector,
+  profileDescriptionSelector,
+  cardListSelector,
+  cardTemplateSelector,
+  validationConfig
+} from '../utils/utils.js'
 
 const userInfo = new UserInfo({
   userName: profileUserNameSelector,
