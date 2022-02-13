@@ -10,9 +10,9 @@ import {
   initialCards,
   editButton,
   addButton,
-  modalEdit,
-  modalAdd,
-  modalImage,
+  modalEditSelector,
+  modalAddSelector,
+  modalImageSelector,
   editFormSelector,
   addFormSelector,
   nameInput,
@@ -30,12 +30,13 @@ const userInfo = new UserInfo({
 });
 
 const editProfileModal = new PopupWithForm({
-  popupSelector: modalEdit,
+  popupSelector: modalEditSelector,
   handleFormSubmit: (evt) => {
     evt.preventDefault();
+    const newEditProfileInputValues = editProfileModal.getInputValues();
     userInfo.setUserInfo({
-      newUserName: nameInput.value,
-      newUserInfo: jobInput.value
+      newUserName: newEditProfileInputValues.name,
+      newUserInfo: newEditProfileInputValues.job
     })
     editProfileModal.close();
   }
@@ -45,11 +46,7 @@ function createNewCard(newCarddata) {
   const card = new Card({
     data: newCarddata,
     handleCardClick: () => {
-      const openModalImage = new PopupWithImage({
-        data: newCarddata,
-        popupSelector: modalImage
-      });
-      openModalImage.open(newCarddata);
+      modalImage.open(newCarddata);
     }
   }, cardTemplateSelector);
   const cardElement = card.generateCard();
@@ -57,8 +54,12 @@ function createNewCard(newCarddata) {
   return cardElement;
 };
 
+const modalImage = new PopupWithImage({
+  popupSelector: modalImageSelector
+});
+
 const addCardModal = new PopupWithForm({
-  popupSelector: modalAdd,
+  popupSelector: modalAddSelector,
   handleFormSubmit: () => {
     const newCardInputValues = addCardModal.getInputValues();
     const newCard = createNewCard(newCardInputValues);
@@ -88,11 +89,10 @@ editButton.addEventListener('click', () => {
   userInfo.getUserInfo();
   nameInput.value = userInfo._userValues.name;
   jobInput.value = userInfo._userValues.info;
-  editProfileModal.setEventListeners();
+  validateModalTypeEdit.resetValidation();
 });
 
 addButton.addEventListener('click', () => {
-  addCardModal.setEventListeners();
   addCardModal.open();
-  validateModalTypeAdd.disableButtonState();
+  validateModalTypeAdd.resetValidation();
 });

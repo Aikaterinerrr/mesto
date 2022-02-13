@@ -2,11 +2,20 @@ class FormValidator {
   constructor(validationConfig, formElement) {
     this._formElement = document.querySelector(formElement);
     this._inputSelector = validationConfig.inputSelector;
+    //this._inputList = document.querySelectorAll(this._inputSelector );
     this._submitButtonSelector = validationConfig.submitButtonSelector;
     this._inactiveButtonClass = validationConfig.inactiveButtonClass;
     this._inputErrorClass = validationConfig.inputErrorClass;
     this._errorClass = validationConfig.errorClass;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   };
+
+  resetValidation() {
+    this._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
+  }
 
   _showInputError = (inputElement) => {
     this._errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
@@ -55,7 +64,6 @@ class FormValidator {
   };
 
   _setEventListeners = () => {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {

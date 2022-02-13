@@ -1,9 +1,9 @@
 export const editButton = document.querySelector('.profile__edit-btn');
 export const addButton = document.querySelector('.profile__add-btn');
 
-export const modalEdit = document.querySelector('.modal_type_edit');
-export const modalAdd = document.querySelector('.modal_type_add');
-export const modalImage = document.querySelector('.modal_type_image');
+export const modalEditSelector = '.modal_type_edit';
+export const modalAddSelector = '.modal_type_add';
+export const modalImageSelector = '.modal_type_image';
 
 export const editFormSelector = '.modal__form_type_edit-form';
 export const addFormSelector = '.modal__form_type_add-form';
