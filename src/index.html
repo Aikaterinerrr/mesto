@@ -18,13 +18,13 @@
     <main class="content">
       <section class="profile">
         <div class="profile__content">
-          <img src="<%=require('./images/ProfilePicture.jpg')%>" alt="Изображение профиля." class="profile__avatar">
+          <div class="profile__avatar"></div>
           <div class="profile__info">
             <div class="profile__user-name-container">
-              <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+              <h1 class="profile__user-name"></h1>
               <button type="button" class="profile__edit-btn button" aria-label="Редактирование профиля."></button>
             </div>
-            <p class="profile__description">Исследователь океана</p>
+            <p class="profile__description"></p>
           </div>
         </div>
         <button type="button" class="profile__add-btn button" aria-label="Добавление фото."></button>
@@ -38,7 +38,7 @@
           <button class="modal__close-btn modal__close-btn_type_modal-edit-close button" type="button"
             aria-label="Закрытие модального окна."></button>
           <h2 class="modal__title">Редактировать профиль</h2>
-          <form method="get" name="modal__form" class="modal__form modal__form_type_edit-form" novalidate>
+          <form name="modal__form" class="modal__form modal__form_type_edit-form" novalidate>
             <label class="modal__label">
               <input type="text" name="name" class="modal__info modal__info_type_user-name" value=""
                 required minlength="2" maxlength="40" id="modal__info_type_user-name">
@@ -60,7 +60,7 @@
           <button class="modal__close-btn modal__close-btn_type_modal-add-close button" type="button"
             aria-label="Закрытие модального окна."></button>
           <h2 class="modal__title">Новое место</h2>
-          <form method="get" name="modal__form" class="modal__form modal__form_type_add-form" novalidate>
+          <form name="modal__form" class="modal__form modal__form_type_add-form" novalidate>
             <label class="modal__label">
               <input type="text" name="name" class="modal__info modal__info_type_place-name" value=""
                 placeholder="Название" required minlength="2" maxlength="30" id="modal__info_type_place-name">
@@ -70,6 +70,34 @@
               <input type="url" name="link" class="modal__info modal__info_type_place-image" value=""
                 placeholder="Ссылка на картинку" required id="modal__info_type_place-image">
               <span class="" id="modal__info_type_place-image-error"></span>
+            </label>
+            <button type="submit" name="modal__submit-btn" class="modal__submit-btn"
+              value="Сохранить">Создать</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal modal_type_confirmation">
+        <div class="modal__overlay"></div>
+        <div class="modal__container">
+          <button class="modal__close-btn modal__close-btn_type_modal-confirmation-close button" type="button"
+            aria-label="Закрытие модального окна."></button>
+          <h2 class="modal__title">Вы уверены?</h2>
+          <form name="modal__form" class="modal__form modal__form_type_confirmation" novalidate>
+            <button type="submit" name="modal__submit-btn" class="modal__submit-btn">Да</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal modal_type_edit-avatar">
+        <div class="modal__overlay"></div>
+        <div class="modal__container">
+          <button class="modal__close-btn modal__close-btn_type_modal-edit-avatar-close button" type="button"
+            aria-label="Закрытие модального окна."></button>
+          <h2 class="modal__title">Обновить аватар</h2>
+          <form name="modal__form" class="modal__form modal__form_type_edit-avatar-form" novalidate>
+            <label class="modal__label">
+              <input type="url" name="avatar" class="modal__info modal__info_type_edit-avatar" value=""
+                placeholder="Ссылка на картинку" required id="modal__info_type_edit-avatar">
+              <span class="" id="modal__info_type_edit-avatar-error"></span>
             </label>
             <button type="submit" name="modal__submit-btn" class="modal__submit-btn"
               value="Сохранить">Сохранить</button>
@@ -91,7 +119,10 @@
           <img src="/" alt="" class="card__card-image">
           <div class="card__card-info">
             <h2 class="card__card-title"></h2>
-            <button type="button" class="card__like-btn" aria-label="Мне нравится."></button>
+            <div class="card__likes-container">
+              <button type="button" class="card__like-btn" aria-label="Мне нравится."></button>
+              <span class="card__likes-counter"></span>
+            </div>
           </div>
         </li>
       </template>

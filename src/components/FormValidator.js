@@ -1,8 +1,7 @@
-class FormValidator {
+export default class FormValidator {
   constructor(validationConfig, formElement) {
     this._formElement = document.querySelector(formElement);
     this._inputSelector = validationConfig.inputSelector;
-    //this._inputList = document.querySelectorAll(this._inputSelector );
     this._submitButtonSelector = validationConfig.submitButtonSelector;
     this._inactiveButtonClass = validationConfig.inactiveButtonClass;
     this._inputErrorClass = validationConfig.inputErrorClass;
@@ -80,5 +79,3 @@ class FormValidator {
       this._setEventListeners();
   };
 };
-
-export default FormValidator;
