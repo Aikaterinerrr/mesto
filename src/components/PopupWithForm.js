@@ -6,7 +6,8 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
     this._formElement = this._popup.querySelector(validationConfig.formSelector);
-    this._inputList = this._popup.querySelectorAll(validationConfig.inputSelector)
+    this._inputList = this._popup.querySelectorAll(validationConfig.inputSelector);
+    this._submitBtn = this._popup.querySelector('.modal__submit-btn');
   };
 
   getInputValues() {
@@ -29,6 +30,14 @@ export default class PopupWithForm extends Popup {
     super._removeEventListeners();
     this._formElement.removeEventListener('submit', this._handleFormSubmit);
   };
+
+  notifyLoadProgress(inProgress, defaultText) {
+    if(inProgress) {
+      this._submitBtn.textContent = 'Сохранение...';
+    } else {
+      this._submitBtn.textContent = defaultText;
+    }
+  }
 
   open() {
     super.open();
