@@ -1,6 +1,5 @@
 export const editButton = document.querySelector('.profile__edit-btn');
 export const addButton = document.querySelector('.profile__add-btn');
-export const submitBtn = document.querySelector('.modal__submit-btn');
 
 export const modalEditSelector = '.modal_type_edit';
 export const modalAddSelector = '.modal_type_add';

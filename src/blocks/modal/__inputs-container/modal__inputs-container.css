@@ -1,0 +1,16 @@
+.modal__inputs-container {
+  margin-top: 54px;
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 768px) {
+  .modal__inputs-container {
+    margin-top: 75px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal__inputs-container {
+    margin-bottom: 15px;
+  }
+}

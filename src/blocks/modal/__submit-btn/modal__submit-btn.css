@@ -13,14 +13,12 @@
   cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
-  margin-top: 48px;
 }
 
 @media screen and (max-width: 768px) {
   .modal__submit-btn {
     font-size: 14px;
     line-height: 17px;
-    margin-top: 15px;
   }
 }
 
