@@ -40,33 +40,33 @@ export default class Card {
 
     this._setEventListeners();
 
-  	return this._element;
+    return this._element;
   };
 
-  _likesHandler(res) {
+  updateLikes(res) {
     this._cardLikeBtn.classList.toggle('card__like-btn_active');
     this._likesCounter.textContent = res.likes.length;
   }
 
   _likeCard = () => {
-    if(this._cardLikeBtn.classList.contains('card__like-btn_active')) {
+    if (this._cardLikeBtn.classList.contains('card__like-btn_active')) {
       this._removeLike();
     } else {
       this._addLike();
     }
   };
 
-  _removeCard() {
+  removeCard() {
     this._element.remove();
   };
 
   _checkOwner() {
-    if(this._data.owner._id != this._ownerId) {
+    if (this._data.owner._id != this._ownerId) {
       this._cardRemoveBtn.style.display = 'none'
     }
 
     this._data.likes.forEach(elem => {
-      if(elem._id === this._ownerId) {
+      if (elem._id === this._ownerId) {
         this._cardLikeBtn.classList.toggle('card__like-btn_active');
       }
     });

@@ -9,15 +9,9 @@ export default class PopupWithImage extends Popup {
 
   open(data) {
     super.open();
-    super._setEventListeners();
 
     this._modalImagePicture.src = data.link;
     this._modalImagePicture.alt = data.name;
     this._modalImageCaption.textContent = data.name;
-  }
-
-  close() {
-    super._close();
-    super._removeEventListeners();
   }
 }

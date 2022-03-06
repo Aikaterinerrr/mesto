@@ -10,7 +10,7 @@ export default class Popup {
     this._setEventListeners();
   };
 
-  _close() {
+  close() {
     this._popup.classList.remove('modal_active');
     this._removeEventListeners();
   };
@@ -28,12 +28,12 @@ export default class Popup {
   }
 
   _setEventListeners() {
-    this._popup.addEventListener('click', this._handleCloseBtnAndOverlay);
+    this._popup.addEventListener('mousedown', this._handleCloseBtnAndOverlay);
     document.addEventListener('keyup', this._handleEscClose);
   };
 
   _removeEventListeners() {
-    this._popup.removeEventListener('click', this._handleCloseBtnAndOverlay);
+    this._popup.removeEventListener('mousedown', this._handleCloseBtnAndOverlay);
     document.removeEventListener('keyup', this._handleEscClose)
   };
 }
