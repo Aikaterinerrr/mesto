@@ -7,18 +7,18 @@ export default class UserInfo {
 
   getUserInfo() {
     return {
-      name:  this._userName.textContent,
+      name: this._userName.textContent,
       about: this._userInfo.textContent
     }
   }
 
-  setUserInfo({newName, newJob, newAvatar}) {
-    this._userName.textContent = newName;
-    this._userInfo.textContent = newJob;
-    this.setAvatar(newAvatar);
+  setUserInfo({ name, about, avatar }) {
+    this._userName.textContent = name;
+    this._userInfo.textContent = about;
+    this.setAvatar(avatar);
   }
 
-  setAvatar(newAvatar) {
-    this._userAvatar.style.backgroundImage = `url(${newAvatar})`;
+  setAvatar(avatar) {
+    this._userAvatar.style.backgroundImage = `url(${avatar})`;
   }
 }

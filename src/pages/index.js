@@ -45,16 +45,15 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([recievedUserInfo, recievedInitialCards]) => {
     ownerId = recievedUserInfo._id;
     userInfo.setUserInfo({
-      newName: recievedUserInfo.name,
-      newJob: recievedUserInfo.about,
-      newAvatar: recievedUserInfo.avatar
+      name: recievedUserInfo.name,
+      about: recievedUserInfo.about,
+      avatar: recievedUserInfo.avatar
     });
     cardsSection.renderItems(recievedInitialCards);
   })
   .catch((err) => {
     console.log(err)
   })
-
 
 //User and avatar options
 const userInfo = new UserInfo({
@@ -67,24 +66,25 @@ const editProfileModal = new PopupWithForm({
   popupSelector: modalEditSelector,
   handleFormSubmit: () => {
     editProfileModal.notifyLoadProgress(true, 'Сохранить');
+    const profileInputValues = editProfileModal.getInputValues();
     api.setUserInfo({
-      name: nameInput.value,
-      about: jobInput.value
+      name: profileInputValues.name,
+      about: profileInputValues.about
     })
-    .then((res) => {
-      userInfo.setUserInfo({
-        newName: res.name,
-        newJob: res.about,
-        newAvatar: res.avatar
+      .then((res) => {
+        userInfo.setUserInfo({
+          name: res.name,
+          about: res.about,
+          avatar: res.avatar
+        })
+        editProfileModal.close();
       })
-      editProfileModal.close();
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      editProfileModal.notifyLoadProgress(false, 'Сохранить')
-    })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        editProfileModal.notifyLoadProgress(false, 'Сохранить')
+      })
   }
 });
 
@@ -93,17 +93,17 @@ const editAvatarModal = new PopupWithForm({
   handleFormSubmit: () => {
     editAvatarModal.notifyLoadProgress(true, 'Сохранить');
     const inputValueData = editAvatarModal.getInputValues();
-    api.addAvatar({inputValueData})
-    .then((res) => {
-      userInfo.setAvatar(res.avatar)
-      editAvatarModal.close();
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      editAvatarModal.notifyLoadProgress(false, 'Сохранить')
-    })
+    api.addAvatar({ inputValueData })
+      .then((res) => {
+        userInfo.setAvatar(res.avatar)
+        editAvatarModal.close();
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        editAvatarModal.notifyLoadProgress(false, 'Сохранить')
+      })
   }
 });
 
@@ -117,18 +117,17 @@ const addCardModal = new PopupWithForm({
       name: newCardInputValues.name,
       link: newCardInputValues.link
     })
-    .then((res) => {
-      const newCard = createNewCard(res);
-      cardsSection.addItem(newCard);
-      addCardModal.close();
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      addCardModal.notifyLoadProgress(false, 'Создать')
-    })
-    validateModalTypeAdd.disableButtonState()
+      .then((res) => {
+        const newCard = createNewCard(res);
+        cardsSection.addItem(newCard);
+        addCardModal.close();
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        addCardModal.notifyLoadProgress(false, 'Создать')
+      })
   }
 });
 
@@ -141,18 +140,18 @@ function createNewCard(newCarddata) {
       modalImage.open(newCarddata);
     },
     handleDelClick: () => {
-      deleteCardModal.submitHandler((evt) => {
+      deleteCardModal.setSubmitHandler((evt) => {
         evt.preventDefault();
         api.delCard({
           cardId: newCarddata._id
         })
-        .then(() => {
-          card._removeCard();
-          deleteCardModal.close()
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+          .then(() => {
+            card.removeCard();
+            deleteCardModal.close()
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       })
       deleteCardModal.open();
     },
@@ -161,23 +160,23 @@ function createNewCard(newCarddata) {
       api.addLike({
         cardId: newCarddata._id
       })
-      .then((res) => {
-        card._likesHandler(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+        .then((res) => {
+          card.updateLikes(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     removeLike: () => {
       api.removeLike({
         cardId: newCarddata._id
       })
-      .then((res) => {
-        card._likesHandler(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+        .then((res) => {
+          card.updateLikes(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }, cardTemplateSelector);
   const cardElement = card.generateCard();
@@ -198,12 +197,19 @@ const cardsSection = new Section({
 });
 
 //Validation options
-const validateModalTypeEdit = new FormValidator(validationConfig, editFormSelector);
-validateModalTypeEdit.enableValidation();
-const validateModalTypeAdd = new FormValidator(validationConfig, addFormSelector);
-validateModalTypeAdd.enableValidation();
-const validateModalTypeEditAvatar = new FormValidator(validationConfig, editAvatarFormSelector);
-validateModalTypeEditAvatar.enableValidation();
+const formValidators = {}
+
+const enableValidation = (validationConfig) => {
+  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(validationConfig, formElement)
+    const formName = formElement.getAttribute('name')
+    formValidators[formName] = validator;
+   validator.enableValidation();
+  });
+};
+
+enableValidation(validationConfig);
 
 //Event listeners
 editButton.addEventListener('click', () => {
@@ -211,15 +217,15 @@ editButton.addEventListener('click', () => {
   const recievedInfo = userInfo.getUserInfo();
   nameInput.value = recievedInfo.name;
   jobInput.value = recievedInfo.about;
-  validateModalTypeEdit.resetValidation();
+  formValidators['modal__form_type_edit-form'].resetValidation();
 });
 
 addButton.addEventListener('click', () => {
   addCardModal.open();
-  validateModalTypeAdd.resetValidation();
+  formValidators['modal__form_type_add-form'].resetValidation();
 });
 
 profileUserAvatar.addEventListener('click', () => {
   editAvatarModal.open();
-  validateModalTypeEditAvatar.resetValidation();
+  formValidators['modal__form_type_edit-avatar-form'].resetValidation();
 });
